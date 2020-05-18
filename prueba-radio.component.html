@@ -1,0 +1,23 @@
+<article (submit)="submit()">
+    <h1>Angular get radio button select value</h1>
+    <h2><span>Seleccionar un periodo: </span></h2>
+
+    <!-- for each periodo in the periods array-->
+    <div *ngFor="let periodo of periodos">
+        <!--crear radio button-->
+        <input
+        type="radio"
+        name="Periodo"
+        value="{{periodo}}"
+        (change)="radioChangeHandler($event)">
+        <i>{{periodo}}</i>
+    </div>
+
+    <!-- el radio button change will be reflected below-->
+    <p><span>Seleccionaste: </span><b>{{selectPeriodo}}</b></p>
+
+    <button type="submit" class="btn btn-success" >Guardar</button>
+</article>
+
+   
+    
