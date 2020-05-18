@@ -1,0 +1,117 @@
+<div class="container" >
+    <h3><b>Datos generales</b></h3>
+  
+  <form (submit)="submit()" [formGroup]="registerForm" >
+    <div class="form-group">
+      <label for="Nombre">Nombre(s):</label>
+      <input type="text" class="margin-right" formControlName="username">
+      
+      <div *ngIf="username.invalid && (username.dirty || username.touched)"
+      class="alert alert-danger">
+        <div *ngIf="username.errors.required">
+              El nombre es requerido.
+        </div>
+      </div>
+    </div>
+  
+      <div class="form-group">
+        <label for="Nombre">Apellido Paterno:</label>
+        <input type="text" class="margin-right" formControlName="apellidop">
+      
+        <div *ngIf="apellidop.invalid && (apellidop.dirty || apellidop.touched)"
+        class="alert alert-danger">
+          <div *ngIf="apellidop.errors.required">
+                El apellido paterno es requerido.
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="Nombre">Apellido Materno:</label>
+        <input type="text" class="margin-right" formControlName="apellidom">
+      
+        <div *ngIf="apellidom.invalid && (apellidom.dirty || apellidom.touched)"
+        class="alert alert-danger">
+          <div *ngIf="apellidom.errors.required">
+                El apellido materno es requerido.
+          </div>
+        </div>
+      </div>
+  <!--Genero...-->
+  <label for="genero">Género:</label>
+  <div *ngFor="let genero of generos">
+<input type="radio" name="genero" value="{{genero}}" (change)="RadioChange($event)" formControlName="genero">
+<i>{{genero}}</i>
+  </div><br>
+  
+      <div class="form-group">
+        <label for="Correo">Correo eletrónico:</label>
+        <input type="email" size="35" class="margin-right" formControlName="correo">
+      
+        <div *ngIf="correo.invalid && (correo.dirty || correo.touched)"
+        class="alert alert-danger">
+          <div *ngIf="correo.errors.required">
+                El correo es requerido.
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="Nombre">Edad Actual:</label>
+        <input type="number" size="5" class="margin-right" formControlName="edad">
+        <div *ngIf="edad.invalid && (edad.dirty || edad.touched)"
+        class="alert alert-danger">
+          <div *ngIf="edad.errors.required">
+                La edad es requerido.
+          </div>
+          <div *ngIf="edad.errors.minlength">
+            La longitud minima de edad debe ser de 2 caracteres.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <mat-label>Fecha de Nacimiento:</mat-label>
+        <input class="margin-right" matInput [matDatepicker]="picker" formControlName="fechan">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <div *ngIf="apellidom.invalid && (fechan.dirty || fechan.touched)"
+        class="alert alert-danger">
+          <div *ngIf="fechan.errors.required">
+                La fecha de nacimiento es requerido.
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="Nombre">Dirección Actual: (Calle, No., Colonia, Municipio, Estado, CP):</label>
+        <textarea class="offie-form-question-texbox office-form-textfield-input form-control border-no-radius"
+         placeholder="Escribe tu respuesta" formControlName="direccion"></textarea>
+      
+        <div *ngIf="direccion.invalid && (direccion.dirty || direccion.touched)"
+        class="alert alert-danger">
+          <div *ngIf="direccion.errors.required">
+                La dirección actual es requerido.
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="Nombre">Nacionalidad:</label>
+        <input type="text" class="margin-right" formControlName="nacionalidad">
+      
+        <div *ngIf="nacionalidad.invalid && (nacionalidad.dirty || nacionalidad.touched)"
+        class="alert alert-danger">
+          <div *ngIf="nacionalidad.errors.required">
+                Nacionalidad es requerido.
+          </div>
+        </div>
+      </div>
+      <div class="wrapper">
+        <button type="submit" class="btn btn-success" [disabled]="registerForm.invalid">Enviar</button>
+        <button type="button" class="btn btn-default" (click)="cancelar()">Cancelar</button> 
+      </div>
+  
+  </form>
+  </div>
+
+  

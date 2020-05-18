@@ -1,0 +1,191 @@
+<mat-horizontal-stepper linear>
+    <mat-step label="Datos generales" completed=true>
+        <div class="container" >
+            <h3><b>Datos generales</b></h3>
+          
+          <form (submit)="submit()" [formGroup]="registerForm" >
+              <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Nombre">Nombre(s):</label>
+                        <input type="text" class="margin-right" formControlName="username">
+                        
+                        <div *ngIf="username.invalid && (username.dirty || username.touched)"
+                        class="alert alert-danger">
+                          <div *ngIf="username.errors.required">
+                                El nombre es requerido.
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Nombre">Apellido Paterno:</label>
+                        <input type="text" class="margin-right" formControlName="apellidop">
+                      
+                        <div *ngIf="apellidop.invalid && (apellidop.dirty || apellidop.touched)"
+                        class="alert alert-danger">
+                          <div *ngIf="apellidop.errors.required">
+                                El apellido paterno es requerido.
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                    
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="Nombre">Apellido Materno:</label>
+                            <input type="text" class="margin-right" formControlName="apellidom">
+                          
+                            <div *ngIf="apellidom.invalid && (apellidom.dirty || apellidom.touched)"
+                            class="alert alert-danger">
+                              <div *ngIf="apellidom.errors.required">
+                                    El apellido materno es requerido.
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                </div><br><br>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <!--Genero...-->
+                         <label for="genero">Género:</label>
+                          <div *ngFor="let genero of generos">
+                            <input type="radio" name="genero" value="{{genero}}" (change)="RadioChange($event)" formControlName="genero">
+                             <i>{{genero}}</i>
+                           </div><br>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="Correo">Correo eletrónico:</label>
+                            <input type="email" size="35" class="margin-right" formControlName="correo">
+                          
+                            <div *ngIf="correo.invalid && (correo.dirty || correo.touched)"
+                            class="alert alert-danger">
+                              <div *ngIf="correo.errors.required">
+                                    El correo es requerido.
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="Nombre">Edad Actual:</label>
+                            <input type="number" size="10" class="margin-right" formControlName="edad">
+                            <div *ngIf="edad.invalid && (edad.dirty || edad.touched)"
+                            class="alert alert-danger">
+                              <div *ngIf="edad.errors.required">
+                                    La edad es requerido.
+                              </div>
+                              <div *ngIf="edad.errors.minlength">
+                                La longitud minima de edad debe ser de 2 caracteres.
+                              </div>
+                            </div>
+                          </div>
+                    </div>               
+                </div><br><br>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <mat-label>Fecha de Nacimiento:</mat-label>
+                            <input class="margin-right" matInput [matDatepicker]="picker" formControlName="fechan">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <div *ngIf="apellidom.invalid && (fechan.dirty || fechan.touched)"
+                            class="alert alert-danger">
+                              <div *ngIf="fechan.errors.required">
+                                    La fecha de nacimiento es requerido.
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="Nombre">Dirección Actual: (Calle, No., Colonia, Municipio, Estado, CP):</label>
+                            <textarea class="offie-form-question-texbox office-form-textfield-input form-control border-no-radius"
+                             placeholder="Escribe tu respuesta" formControlName="direccion"></textarea>
+                          
+                            <div *ngIf="direccion.invalid && (direccion.dirty || direccion.touched)"
+                            class="alert alert-danger">
+                              <div *ngIf="direccion.errors.required">
+                                    La dirección actual es requerido.
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="Nombre">Nacionalidad:</label>
+                            <input type="text" class="margin-right" formControlName="nacionalidad">
+                          
+                            <div *ngIf="nacionalidad.invalid && (nacionalidad.dirty || nacionalidad.touched)"
+                            class="alert alert-danger">
+                              <div *ngIf="nacionalidad.errors.required">
+                                    Nacionalidad es requerido.
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                </div><br><br><br><br>
+                <div class="wrapper">
+                <button type="button" class="btn btn-default" (click)="cancelar()">Cancelar</button> 
+                <button type="submit" class="btn btn-success" matStepperNext [disabled]="registerForm.invalid">Enviar</button>
+               </div>
+          </form>
+        </div>
+    </mat-step>
+<!--Informacion de la carrera-->
+    <mat-step label="Información de la carrera" completed=false optional>
+        <br><br><br><br><br><br><br><br><br><br>
+        <div class="row">
+        <div class="col-md-4">
+          <h4>¿Cuándo quieres entrar con nosotros?</h4>
+          <mat-form-field>
+              <mat-label>Periodo al que desea ingresar</mat-label>
+              <mat-select>
+                  <mat-option *ngFor="let Periodo of periodos" [value]="Periodo.value">
+                      {{Periodo.viewValue}}
+                      </mat-option>
+              </mat-select>
+          </mat-form-field>
+      </div>
+            <div class="col-md-4">
+                <h4>¿Qué quieres estudiar?</h4>
+                <mat-form-field>
+                    <mat-label>Programa al que desea ingresar</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let Programa of programas" [value]="Programa.value">
+                            {{Programa.viewValue}}
+                            </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+              <div class="col-md-4">
+                  <h4>¿En dónde quieres estudiar?</h4>
+                      <mat-form-field>
+                            <mat-label>Campus al que quiere ingresar</mat-label>
+                              <mat-select>
+                                    <mat-option *ngFor="let Campus of campuses" [value]="Campus.value">
+                                          {{Campus.viewValue}}
+                            </mat-option>
+                           </mat-select>
+                          </mat-form-field>
+              </div>
+        </div><br><br><br><br><br><br><br><br>
+        <div class="wrapper">
+            <button mat-button matStepperPrevious>Regresar</button>
+            <button mat-button matStepperNext color="primary">Siguiente</button> 
+        </div>
+    </mat-step>
+<!--Pedir Documentos-->
+    <mat-step label="Documentos" completed=false>
+        <p>Acta de nacimiento, CURP, Descripcion</p>
+        <div>
+            <button mat-button matStepperPrevious>Regresar</button>
+            <button mat-button matStepperNext>Finalizar</button>
+          </div>
+    </mat-step>
+</mat-horizontal-stepper>
